@@ -26,3 +26,49 @@ The Backend App must support:
 - Get Single Task: Retrieve details by ID; handle "Not Found" scenarios gracefully.
 - Update Task: Partially update fields (e.g., just changing the status).
 - Delete Task: Remove a task and return an appropriate status code.
+
+---
+## Feature
+### **Create Task**
+POST /v1/tasks with validation and duplicate-title check.
+
+**Endpoint** : POST /v1/tasks 
+
+```json
+{
+  "title": "string (max 100)",
+  "description": "string (max 500)",
+  "status": "pending | in progress | completed",
+  "priority": "optional string"
+}
+```
+
+
+## Non Functional Requirements
+1. Include URI versioning (/v1/tasks) 
+2. Proper Status Codes use:
+    a. 201 - create task
+    b. 400 Bad Request
+    c. 500 Server Error
+
+2. Error Response Format:
+```json
+{
+  "error": {
+    "code": "INVALID_TASK_TITLE",
+    "message": "Title is required and must be a string with a maximum length of 100 characters"
+  }
+}
+```
+
+
+
+## How to run
+1. Install dependencies:
+```bash
+npm install
+```
+2. Start server:
+```bash
+node src/server.js
+```
