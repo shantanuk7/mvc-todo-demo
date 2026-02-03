@@ -7,7 +7,13 @@ const taskExistsByTitle = (title) =>{
         }
     }
     return false;
+} 
+
+const saveTask = (task) =>{
+    tasks.set(task.id,task);
+    return task;
 }
 module.exports = {
     taskExistsByTitle,
+    saveTask
 }
