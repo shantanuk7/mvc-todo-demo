@@ -1,3 +1,64 @@
+const validateUpdateTask = (req, res, next) => {
+    const { title, description, status, priority } = req.body;
+
+    if (!title && !description && !status && !priority) {
+        return res.status(400).json({
+            error: {
+                code: "EMPTY_UPDATE_PAYLOAD",
+                message: "At least one field must be provided for update"
+            }
+        });
+    }
+
+    if (title !== undefined) {
+        if (typeof title !== 'string' || title.length > 100) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_TITLE",
+                    message: "Title must be a string with a maximum length of 100 characters"
+                }
+            });
+        }
+    }
+
+    if (description !== undefined) {
+        if (typeof description !== 'string' || description.length > 500) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_DESCRIPTION",
+                    message: "Description must be a string with a maximum length of 500 characters"
+                }
+            });
+        }
+    }
+
+    if (status !== undefined) {
+        if (!['pending', 'in progress', 'completed'].includes(status.toLowerCase())) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_STATUS",
+                    message: "Status must be either 'pending', 'in progress', or 'completed'"
+                }
+            });
+        }
+        req.body.status = status.toLowerCase();
+    }
+
+    if (priority !== undefined) {
+        if (!['low', 'medium', 'high'].includes(priority.toLowerCase())) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_PRIORITY",
+                    message: "Priority must be either 'low', 'medium', or 'high'"
+                }
+            });
+        }
+        req.body.priority = priority.toLowerCase();
+    }
+
+    next();
+};
+
 const validateTask = (req, res, next) => {
     let { title, description, status, priority } = req.body;
 
