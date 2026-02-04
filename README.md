@@ -28,20 +28,34 @@ The Backend App must support:
 - Delete Task: Remove a task and return an appropriate status code.
 
 ---
-## Feature
-### **Create Task**
-POST /v1/tasks with validation and duplicate-title check.
-
-**Endpoint** : POST /v1/tasks 
-
+## Feature (Completed)
+### **1. Create Task**
+Allows users to create new tasks with validation
+- **Endpoint** : POST /v1/tasks 
 ```json
 {
   "title": "string (max 100)",
   "description": "string (max 500)",
   "status": "pending | in progress | completed",
-  "priority": "optional string"
+  "priority": "low | medium | high"
 }
 ```
+- `createdAt` and `updatedAt` are set automatically during task creation.
+- Tasks are created with a default status as pending and priority as low.
+- Prevents saving a task if another task with the same title already exists.
+- Validates title and description length using middleware.
+
+### **2. List Tasks**
+Allows users to get new tasks with or woithout filter
+- Returns all tasks when no filters are provided.
+- Supports filtering by task status and priority.
+
+**Endpoint**
+- GET /v1/tasks
+- GET /v1/tasks?status=pending
+- GET /v1/tasks?priority=high
+- GET /v1/tasks?status=pending&priority=medium
+
 
 
 ## Non Functional Requirements
@@ -64,11 +78,20 @@ POST /v1/tasks with validation and duplicate-title check.
 
 
 ## How to run
-1. Install dependencies:
+### 1. Clone the repository
+```code
+git clone https://github.com/shantanuk7/mvc-todo-demo.git
+cd mvc-todo-demo
+```
+### 2. Install dependencies:
 ```bash
 npm install
 ```
-2. Start server:
+### 3. Start server:
 ```bash
 node src/server.js
+```
+### 4. Server will start at:
+```bash
+http://localhost:3000
 ```
