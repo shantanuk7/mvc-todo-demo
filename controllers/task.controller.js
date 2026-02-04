@@ -45,13 +45,6 @@ const updateTask = async (req, res) => {
                     "message": error.message
                 }
             });
-        } else {
-            res.status(500).json({
-                "error": {
-                    "code": "INTERNAL_SERVER_ERROR",
-                    "message": error.message
-                }
-            });
         }
     }
 };
