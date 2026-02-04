@@ -13,7 +13,25 @@ const saveTask = (task) =>{
     tasks.set(task.id,task);
     return task;
 }
+
+const findAllTasks = (status, priority) => {
+    let result = Array.from(tasks.values());
+    if (status) {
+        result = result.filter(
+            task => task.status.toLowerCase() === status.toLowerCase()
+        );
+    }
+    if (priority) {
+        result = result.filter(
+            task => task.priority.toLowerCase() === priority.toLowerCase()
+        );
+    }
+    return result;
+};
+
+
 module.exports = {
     taskExistsByTitle,
-    saveTask
+    saveTask,
+    findAllTasks
 }
