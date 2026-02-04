@@ -16,6 +16,10 @@ const createTask = async(title, description, status, priority) =>{
     return repository.saveTask(task);
 }
 
+const getAllTasksService = async (status, priority) =>{
+    return repository.findAllTasks(status, priority);
+}
 module.exports = {
-  createTask
+  createTask,
+  getAllTasksService
 };
