@@ -56,7 +56,7 @@ Allows users to get new tasks with or woithout filter
 - GET /v1/tasks?priority=high
 - GET /v1/tasks?status=pending&priority=medium
 
-## **3. Update Task (Partially)**
+## **3. Update Task**
 Allows users to update one or more fields of an existing task.
 
 ### **Endpoint**
