@@ -45,6 +45,13 @@ const updateTask = async (req, res) => {
                     "message": error.message
                 }
             });
+        } else {
+            res.status(400).json({
+                "error": {
+                    "code": "INVALID_TASK_DATA",
+                    "message": error.message
+                }
+            });
         }
     }
 };

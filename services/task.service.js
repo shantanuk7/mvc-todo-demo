@@ -24,7 +24,12 @@ const getAllTasksService = async (status, priority) =>{
 const updateTaskService = async (taskId, title, description, status, priority) => {
     const updatedTask = {};
 
-    if (title !== undefined) updatedTask.title = title;
+    if (title !== undefined){
+        if (repository.taskExistsByTitle(title)) {
+            throw new Error('Task with this title already exists');
+        }
+        updatedTask.title = title
+    };
     if (description !== undefined) updatedTask.description = description;
     if (status !== undefined) updatedTask.status = status;
     if (priority !== undefined) updatedTask.priority = priority;
