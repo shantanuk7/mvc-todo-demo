@@ -15,6 +15,22 @@ const createTask = async (req,res)=>{
     }
 }
 
+const getAllTasks = async (req,res)=>{
+    try {
+        const {status, priority} = req.query;
+        const tasks = await service.getAllTasksService(status, priority);
+        res.status(200).send(tasks);
+    } catch (error) {
+        res.status(500).json({
+            "error":{
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": error.message
+            }
+        })
+    }
+}
+
 module.exports = {
-    createTask
+    createTask,
+    getAllTasks
 };
