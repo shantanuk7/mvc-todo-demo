@@ -29,6 +29,8 @@ const updateTaskService = async (taskId, title, description, status, priority) =
     if (status !== undefined) updatedTask.status = status;
     if (priority !== undefined) updatedTask.priority = priority;
 
+    updatedTask.updatedAt = new Date().toISOString();
+
     return repository.updateTaskByID(taskId, updatedTask);
 };
 
