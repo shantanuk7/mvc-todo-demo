@@ -5,6 +5,6 @@ const validateTaskMiddleware = require('../middlewares/task.middleware.js');
 
 router.post('/', validateTaskMiddleware, taskController.createTask);
 router.get('/', taskController.getAllTasks);
-router.patch('/:id', taskController.updateTask);
+router.patch('/:id', validateTaskMiddleware, taskController.updateTask);
 
 module.exports = router;
