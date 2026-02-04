@@ -33,19 +33,21 @@ const validateUpdateTask = (req, res, next) => {
     }
 
     if (status !== undefined) {
-        if (!['pending', 'in progress', 'completed'].includes(status.toLowerCase())) {
+
+        if (typeof status !== 'string' || !['pending', 'in progress', 'completed'].includes(status.toLowerCase())) {
             return res.status(400).json({
                 error: {
                     code: "INVALID_TASK_STATUS",
-                    message: "Status must be either 'pending', 'in progress', or 'completed'"
+                    message: "Status must be either 'pending', 'in progress', or 'completed' string"
                 }
             });
         }
+
         req.body.status = status.toLowerCase();
     }
 
     if (priority !== undefined) {
-        if (!['low', 'medium', 'high'].includes(priority.toLowerCase())) {
+        if (typeof priority !== 'string' || !['low', 'medium', 'high'].includes(priority.toLowerCase())) {
             return res.status(400).json({
                 error: {
                     code: "INVALID_TASK_PRIORITY",
