@@ -1,7 +1,7 @@
 // src/services/task.service.js
 
 const crypto = require('crypto');
-const Task = require('../../models/task.model.js');
+const Task = require('../models/task.model.js');
 const repository = require('../repositories/task.repository.js');
 
 const createTask = async(title, description, status, priority) =>{
