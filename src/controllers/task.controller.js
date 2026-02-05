@@ -1,4 +1,4 @@
-const service = require('../services/task.service.js');
+const service = require('../../services/task.service.js');
 
 const createTask = async (req,res)=>{
     const {title, description, status, priority} = req.body;
