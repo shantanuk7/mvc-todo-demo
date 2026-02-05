@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const taskController = require('../../controllers/task.controller.js');
+const taskController = require('../controllers/task.controller.js');
 const {validateTask, validateUpdateTask} = require('../middlewares/task.middleware.js');
 
 router.post('/', validateTask, taskController.createTask);
