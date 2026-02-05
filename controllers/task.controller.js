@@ -30,7 +30,34 @@ const getAllTasks = async (req,res)=>{
     }
 }
 
+const updateTask = async (req, res) => {
+    const taskId = req.params.id;
+    const { title, description, status, priority } = req.body;
+
+    try {
+        const updatedTask = await service.updateTaskService(taskId, title, description, status, priority);
+        res.status(200).send(updatedTask);
+    } catch (error) {
+        if (error.message === "Task not found") {
+            res.status(404).json({
+                "error": {
+                    "code": "TASK_NOT_FOUND",
+                    "message": error.message
+                }
+            });
+        } else {
+            res.status(400).json({
+                "error": {
+                    "code": "INVALID_TASK_DATA",
+                    "message": error.message
+                }
+            });
+        }
+    }
+};
+
 module.exports = {
     createTask,
-    getAllTasks
+    getAllTasks,
+    updateTask
 };

@@ -56,7 +56,21 @@ Allows users to get new tasks with or woithout filter
 - GET /v1/tasks?priority=high
 - GET /v1/tasks?status=pending&priority=medium
 
+## **3. Update Task**
+Allows users to update one or more fields of an existing task.
 
+### **Endpoint**
+- **PATCH** `/v1/tasks/:id`
+
+### **Request Body** (all fields optional)
+```json
+{
+  "title": "string (max 100)",
+  "description": "string (max 500)",
+  "status": "pending | in progress | completed",
+  "priority": "low | medium | high"
+}
+```
 
 ## Non Functional Requirements
 1. Include URI versioning (/v1/tasks) 
