@@ -1,7 +1,7 @@
 // src/app.js
 const express = require("express");
 const app = express();
-const taskRoutes = require('../routes/task.route.js')
+const taskRoutes = require('./routes/task.route.js')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
