@@ -32,7 +32,7 @@ The Backend App must support:
 ### **1. Create Task**
 Allows users to create new tasks with validation
 - **Endpoint** : POST /v1/tasks 
-- Formate:
+- Format:
 ```json
 {
   "title": "string (max 100)",
@@ -113,7 +113,7 @@ Allows users to retrieve a single task by its unique identifier.
 {
   "error": {
     "code": "TASK_NOT_FOUND",
-    "message": "Task of this id: ${id} is not found"
+    "message": "Task with  id: ${id}  not found"
   }
 }
 ```
