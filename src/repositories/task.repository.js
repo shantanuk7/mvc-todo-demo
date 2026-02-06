@@ -40,9 +40,19 @@ const updateTaskByID = (taskId, updatedTask) => {
     return tasks.get(taskId);
 }
 
+const findById = (taskId) => {
+    const task =tasks.get(taskId);
+    if(!task){
+        throw new Error(`Task of this id: ${taskId} is not found`)
+    }
+    return task;
+}
+
+
 module.exports = {
     taskExistsByTitle,
     saveTask,
     findAllTasks,
-    updateTaskByID
+    updateTaskByID,
+    findById
 }
