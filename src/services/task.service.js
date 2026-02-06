@@ -25,7 +25,6 @@ const getAllTasksService = async (status, priority) =>{
 
 const updateTaskService = async (taskId, title, description, status, priority) => {
     const updatedTask = {};
-
     if (title !== undefined){
         if (repository.taskExistsByTitle(title)) {
             throw new Error('Task with this title already exists');
@@ -41,8 +40,13 @@ const updateTaskService = async (taskId, title, description, status, priority) =
     return repository.updateTaskByID(taskId, updatedTask);
 };
 
+const getTaskById = async (taskId)=> {
+    return repository.findById(taskId);
+}
+
 module.exports = {
   createTask,
   getAllTasksService,
-  updateTaskService
+  updateTaskService,
+  getTaskById
 };
