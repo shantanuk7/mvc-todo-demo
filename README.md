@@ -32,12 +32,13 @@ The Backend App must support:
 ### **1. Create Task**
 Allows users to create new tasks with validation
 - **Endpoint** : POST /v1/tasks 
+- Formate:
 ```json
 {
   "title": "string (max 100)",
   "description": "string (max 500)",
-  "status": "pending | in progress | completed",
-  "priority": "low | medium | high"
+  "status": "pending ", //any of (pending, completed, in progress)
+  "priority": "low " //any of( low, medium, high)
 }
 ```
 - `createdAt` and `updatedAt` are set automatically during task creation.
@@ -67,8 +68,8 @@ Allows users to update one or more fields of an existing task.
 {
   "title": "string (max 100)",
   "description": "string (max 500)",
-  "status": "pending | in progress | completed",
-  "priority": "low | medium | high"
+  "status": "pending",   //any of (pending, completed, in progress)
+  "priority": "low"  //any of( low, medium, high)
 }
 ```
 
@@ -88,6 +89,39 @@ Allows users to update one or more fields of an existing task.
   }
 }
 ```
+## **4. Get Task by ID**
+Allows users to retrieve a single task by its unique identifier.
+
+### **Endpoint**
+- **GET** `/v1/tasks/:id`
+
+### **Response** (Success - 200)
+```json
+{
+  "id": "id",
+  "title": "string",
+  "description": "string",
+  "status": "pending",
+  "priority": "low",
+  "createdAt": "ISO 8601 timestamp",
+  "updatedAt": "ISO 8601 timestamp"
+}
+```
+
+### **Response** (Not Found - 404)
+```json
+{
+  "error": {
+    "code": "TASK_NOT_FOUND",
+    "message": "Task of this id: ${id} is not found"
+  }
+}
+```
+
+### **Features**
+- Retrieves task details by UUID.
+- Returns 404 status code if task ID is not found.
+- Handles invalid UUID format gracefully with appropriate error response.
 
 
 
