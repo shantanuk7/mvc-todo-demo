@@ -8,5 +8,6 @@ const {validateTask, validateUpdateTask} = require('../middlewares/task.middlewa
 router.post('/', validateTask, taskController.createTask);
 router.get('/', taskController.getAllTasks);
 router.patch('/:id', validateUpdateTask, taskController.updateTask);
+router.get('/:id', taskController.getTaskById);
 
 module.exports = router;
