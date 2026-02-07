@@ -113,7 +113,7 @@ Allows users to retrieve a single task by its unique identifier.
 {
   "error": {
     "code": "TASK_NOT_FOUND",
-    "message": "Task with  id: ${id}  not found"
+    "message": "Task with  id: <id>  not found"
   }
 }
 ```
@@ -148,7 +148,7 @@ Allows users to delete a single task by its unique identifier.
 {
   "error": {
     "code": "TASK_NOT_FOUND",
-    "message": "Task with  id: ${id}  not found"
+    "message": "Task with  id: <id>  not found"
   }
 }
 ```

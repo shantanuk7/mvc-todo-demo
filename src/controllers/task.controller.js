@@ -82,7 +82,6 @@ const deleteTaskById = async (req, res) => {
     } catch (error) {
         res.status(404).json({
             "error": {
-                
                 "code": "TASK_NOT_FOUND",
                 "message": error.message
             }
