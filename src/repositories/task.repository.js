@@ -48,10 +48,16 @@ const findById = (taskId) => {
     return task;
 }
 
+const deleteTaskById = (taskId) => {
+    findById(taskId);
+    tasks.delete(taskId);
+};
+
 module.exports = {
     taskExistsByTitle,
     saveTask,
     findAllTasks,
     updateTaskByID,
-    findById
+    findById,
+    deleteTaskById
 }

@@ -43,9 +43,14 @@ const getTaskById = async (taskId) => {
     return repository.findById(taskId);
 }
 
+const deleteTaskById = async (taskId) => {
+    repository.deleteTaskById(taskId);
+};
+
 module.exports = {
-    createTask,
-    getAllTasksService,
-    updateTaskService,
-    getTaskById
+  createTask,
+  getAllTasksService,
+  updateTaskService,
+  getTaskById,
+  deleteTaskById
 };

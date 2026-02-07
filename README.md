@@ -113,15 +113,43 @@ Allows users to retrieve a single task by its unique identifier.
 {
   "error": {
     "code": "TASK_NOT_FOUND",
-    "message": "Task with  id: ${id}  not found"
+    "message": "Task with  id: <id>  not found"  
   }
 }
 ```
+
 
 ### **Features**
 - Retrieves task details by UUID.
 - Returns 404 status code if task ID is not found.
 - Handles invalid UUID format gracefully with appropriate error response.
+
+## **5. Delete Task by ID**
+Allows users to delete a single task by its unique identifier.
+
+### **Endpoint**
+- **DELETE** `/v1/tasks/:id`
+
+### **Response** (Success - 200)
+```json
+{
+  "success": true,
+  "message": "Task deleted successfully"
+}
+```
+
+### **Response** (Not Found - 404)
+```json
+{
+  "error": {
+    "code": "TASK_NOT_FOUND",
+    "message": "Task with id: <id> not found"
+  }
+}
+```
+### **Features**
+- Deletes task details by UUID.
+- Returns 404 status code if task ID is not found.
 
 
 
