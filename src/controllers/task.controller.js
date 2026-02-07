@@ -74,13 +74,15 @@ const getTaskById = async (req, res) => {
     }
 };
 
-const deleteTaskById = async (req,res) =>{
-    const taskId =req.params.id;
-    try{
-        await service.deleteTaskById(taskId);
-        res.status(200).send(result);
-    }
-    catch(error){
+const deleteTaskById = async (req, res) => {
+    const taskId = req.params.id;
+    try {
+        const deletedTask = await service.deleteTaskById(taskId);
+        res.status(200).json({
+            "success": true,
+            "message": "Task deleted successfully"
+        });
+    } catch (error) {
         res.status(404).json({
             "error": {
                 "code": "TASK_NOT_FOUND",
