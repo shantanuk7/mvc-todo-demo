@@ -4,9 +4,8 @@ const crypto = require('crypto');
 const Task = require('../models/task.model.js');
 const repository = require('../repositories/task.repository.js');
 
-const createTask = async(title, description, status, priority) =>{
-    
-    if(repository.taskExistsByTitle(title)){
+const createTask = async (title, description, status, priority) => {
+    if (repository.taskExistsByTitle(title)) {
         throw new Error('Task with this title already exists');
     }
     const task = new Task({
@@ -19,14 +18,13 @@ const createTask = async(title, description, status, priority) =>{
     return repository.saveTask(task);
 }
 
-const getAllTasksService = async (status, priority) =>{
+const getAllTasksService = async (status, priority) => {
     return repository.findAllTasks(status, priority);
 }
 
 const updateTaskService = async (taskId, title, description, status, priority) => {
     const updatedTask = {};
-
-    if (title !== undefined){
+    if (title !== undefined) {
         if (repository.taskExistsByTitle(title)) {
             throw new Error('Task with this title already exists');
         }
@@ -41,8 +39,13 @@ const updateTaskService = async (taskId, title, description, status, priority) =
     return repository.updateTaskByID(taskId, updatedTask);
 };
 
+const getTaskById = async (taskId) => {
+    return repository.findById(taskId);
+}
+
 module.exports = {
-  createTask,
-  getAllTasksService,
-  updateTaskService
+    createTask,
+    getAllTasksService,
+    updateTaskService,
+    getTaskById
 };

@@ -112,4 +112,4 @@ const validateTask = (req, res, next) => {
     next();
 };
 
-module.exports = {validateTask, validateUpdateTask};
+module.exports = { validateTask, validateUpdateTask };

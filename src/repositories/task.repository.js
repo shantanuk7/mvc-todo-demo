@@ -2,17 +2,17 @@
 
 const tasks = new Map();
 
-const taskExistsByTitle = (title) =>{
-    for(let task of tasks.values()){
-        if(task.title === title){
+const taskExistsByTitle = (title) => {
+    for (let task of tasks.values()) {
+        if (task.title === title) {
             return true;
         }
     }
     return false;
-} 
+}
 
-const saveTask = (task) =>{
-    tasks.set(task.id,task);
+const saveTask = (task) => {
+    tasks.set(task.id, task);
     return task;
 }
 
@@ -40,9 +40,18 @@ const updateTaskByID = (taskId, updatedTask) => {
     return tasks.get(taskId);
 }
 
+const findById = (taskId) => {
+    const task = tasks.get(taskId);
+    if (!task) {
+        throw new Error(`Task with id: ${taskId} not found`)
+    }
+    return task;
+}
+
 module.exports = {
     taskExistsByTitle,
     saveTask,
     findAllTasks,
-    updateTaskByID
+    updateTaskByID,
+    findById
 }
