@@ -32,9 +32,6 @@ const getAllTasks = async (req, res) => {
     }
 }
 
-
-
-
 const updateTask = async (req, res) => {
     const taskId = req.params.id;
     const { title, description, status, priority } = req.body;
@@ -60,8 +57,6 @@ const updateTask = async (req, res) => {
         }
     }
 };
-
-
 
 const getTaskById = async (req, res) => {
     const taskId = req.params.id;

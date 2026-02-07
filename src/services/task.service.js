@@ -5,7 +5,6 @@ const Task = require('../models/task.model.js');
 const repository = require('../repositories/task.repository.js');
 
 const createTask = async (title, description, status, priority) => {
-
     if (repository.taskExistsByTitle(title)) {
         throw new Error('Task with this title already exists');
     }
