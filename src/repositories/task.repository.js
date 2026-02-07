@@ -11,7 +11,6 @@ const taskExistsByTitle = (title) => {
     return false;
 }
 
-
 const saveTask = (task) => {
     tasks.set(task.id, task);
     return task;
