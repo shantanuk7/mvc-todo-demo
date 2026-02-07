@@ -49,7 +49,7 @@ const findById = (taskId) => {
 }
 
 const deleteTaskById = (taskId) => {
-    const task = findById(taskId);
+    findById(taskId);
     tasks.delete(taskId);
 };
 

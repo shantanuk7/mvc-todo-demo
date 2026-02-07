@@ -44,7 +44,7 @@ const getTaskById = async (taskId) => {
 }
 
 const deleteTaskById = async (taskId) => {
-    return repository.deleteTaskById(taskId);
+    repository.deleteTaskById(taskId);
 };
 
 module.exports = {
