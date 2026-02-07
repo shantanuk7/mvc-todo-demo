@@ -133,13 +133,8 @@ Allows users to delete a single task by its unique identifier.
 ### **Response** (Success - 200)
 ```json
 {
-  "id": "id",
-  "title": "string",
-  "description": "string",
-  "status": "pending",
-  "priority": "low",
-  "createdAt": "ISO 8601 timestamp",
-  "updatedAt": "ISO 8601 timestamp"
+  "success": true,
+  "message": "Task deleted successfully"
 }
 ```
 
@@ -152,7 +147,6 @@ Allows users to delete a single task by its unique identifier.
   }
 }
 ```
-
 ### **Features**
 - Deletes task details by UUID.
 - Returns 404 status code if task ID is not found.

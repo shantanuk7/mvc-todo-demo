@@ -77,7 +77,7 @@ const getTaskById = async (req, res) => {
 const deleteTaskById = async (req, res) => {
     const taskId = req.params.id;
     try {
-        const deletedTask = await service.deleteTaskById(taskId);
+        await service.deleteTaskById(taskId);
         res.status(200).json({
             "success": true,
             "message": "Task deleted successfully"

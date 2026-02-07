@@ -51,7 +51,6 @@ const findById = (taskId) => {
 const deleteTaskById = (taskId) => {
     const task = findById(taskId);
     tasks.delete(taskId);
-    return task;
 };
 
 module.exports = {
