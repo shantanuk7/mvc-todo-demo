@@ -18,6 +18,26 @@ const createTask = async (title, description, status, priority) => {
     return repository.saveTask(task);
 }
 
+const createTasks = async (tasksData) => {
+    const seenTitles = new Set();
+    const tasksToSave = tasksData.map((taskData) => {
+        const { title, description, status, priority } = taskData;
+        if (repository.taskExistsByTitle(title) || seenTitles.has(title)) {
+            throw new Error('Task with this title already exists');
+        }
+        seenTitles.add(title);
+        return new Task({
+            id: crypto.randomUUID(),
+            title,
+            description,
+            status,
+            priority
+        });
+    });
+
+    return tasksToSave.map((task) => repository.saveTask(task));
+}
+
 const getAllTasksService = async (status, priority) => {
     return repository.findAllTasks(status, priority);
 }
@@ -49,6 +69,7 @@ const deleteTaskById = async (taskId) => {
 
 module.exports = {
   createTask,
+    createTasks,
   getAllTasksService,
   updateTaskService,
   getTaskById,
