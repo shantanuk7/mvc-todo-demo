@@ -17,6 +17,20 @@ const createTask = async (req, res) => {
     }
 }
 
+const createTasks = async (req, res) => {
+    try {
+        const tasks = await service.createTasks(req.body);
+        res.status(201).send(tasks);
+    } catch (error) {
+        res.status(400).json({
+            "error": {
+                "code": "INVALID_TASK_DATA",
+                "message": error.message
+            }
+        });
+    }
+}
+
 const getAllTasks = async (req, res) => {
     try {
         const { status, priority } = req.query;
@@ -91,6 +105,7 @@ const deleteTaskById = async (req, res) => {
 
 module.exports = {
     createTask,
+    createTasks,
     getAllTasks,
     updateTask,
     getTaskById,
