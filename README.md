@@ -26,6 +26,7 @@ The Backend App must support:
 - Get Single Task: Retrieve details by ID; handle "Not Found" scenarios gracefully.
 - Update Task: Partially update fields (e.g., just changing the status).
 - Delete Task: Remove a task and return an appropriate status code.
+- Create Tasks in Bulk: Add multiple tasks in a single request.
 
 ---
 ## Feature (Completed)
@@ -150,6 +151,30 @@ Allows users to delete a single task by its unique identifier.
 ### **Features**
 - Deletes task details by UUID.
 - Returns 404 status code if task ID is not found.
+
+## **6. Create Tasks in Bulk**
+Allows users to create multiple tasks with a single request.
+- **Endpoint** : POST /v1/tasks/bulk
+- Format:
+```json
+[
+  {
+    "title": "string 1 (max 100)",
+    "description": "string (max 500)",
+    "status": "pending", //any of (pending, completed, in progress)
+    "priority": "low" //any of( low, medium, high)
+  },
+  {
+    "title": "string 2 (max 100)",
+    "description": "string (max 500)",
+    "status": "pending", //any of (pending, completed, in progress)
+    "priority": "low" //any of( low, medium, high)
+  }
+]
+```
+- Each task is validated the same as single-task creation.
+- Default `status` is `pending` and default `priority` is `low`.
+- Duplicate titles in the payload or existing tasks are rejected.
 
 
 
