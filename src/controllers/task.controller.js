@@ -2,6 +2,12 @@
 
 const service = require('../services/task.service.js');
 
+/**
+ * Create a single task.
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<void>}
+ */
 const createTask = async (req, res) => {
     const { title, description, status, priority } = req.body;
     try {
@@ -17,6 +23,12 @@ const createTask = async (req, res) => {
     }
 }
 
+/**
+ * Create multiple tasks in bulk.
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<void>}
+ */
 const createTasks = async (req, res) => {
     try {
         const tasks = await service.createTasks(req.body);
@@ -31,6 +43,12 @@ const createTasks = async (req, res) => {
     }
 }
 
+/**
+ * Fetch all tasks with optional filters.
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<void>}
+ */
 const getAllTasks = async (req, res) => {
     try {
         const { status, priority } = req.query;
@@ -46,6 +64,12 @@ const getAllTasks = async (req, res) => {
     }
 }
 
+/**
+ * Update a task by id.
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<void>}
+ */
 const updateTask = async (req, res) => {
     const taskId = req.params.id;
     const { title, description, status, priority } = req.body;
@@ -72,6 +96,12 @@ const updateTask = async (req, res) => {
     }
 };
 
+/**
+ * Get a task by id.
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<void>}
+ */
 const getTaskById = async (req, res) => {
     const taskId = req.params.id;
 
@@ -88,6 +118,12 @@ const getTaskById = async (req, res) => {
     }
 };
 
+/**
+ * Delete a task by id.
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<void>}
+ */
 const deleteTaskById = async (req, res) => {
     const taskId = req.params.id;
     try {
