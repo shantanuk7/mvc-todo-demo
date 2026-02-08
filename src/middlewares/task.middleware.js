@@ -112,4 +112,87 @@ const validateTask = (req, res, next) => {
     next();
 };
 
-module.exports = { validateTask, validateUpdateTask };
+const validateBulkTasks = (req, res, next) => {
+    if (!Array.isArray(req.body) || req.body.length === 0) {
+        return res.status(400).json({
+            error: {
+                code: "INVALID_BULK_PAYLOAD",
+                message: "Request body must be a non-empty array of tasks"
+            }
+        });
+    }
+
+    const normalizedTasks = [];
+
+    for (let index = 0; index < req.body.length; index += 1) {
+        const task = req.body[index];
+        if (!task || typeof task !== 'object' || Array.isArray(task)) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_DATA",
+                    message: `Task at index ${index} must be an object`
+                }
+            });
+        }
+
+        const { title, description, status, priority } = task;
+
+        if (!title || typeof title !== 'string' || title.length > 100) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_TITLE",
+                    message: `Task at index ${index} has an invalid title`
+                }
+            });
+        }
+
+        if (!description || typeof description !== 'string' || description.length > 500) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_DESCRIPTION",
+                    message: `Task at index ${index} has an invalid description`
+                }
+            });
+        }
+
+        let normalizedStatus = status;
+        if (!normalizedStatus) {
+            normalizedStatus = 'pending';
+        } else if (typeof normalizedStatus !== 'string' || !['pending', 'in progress', 'completed'].includes(normalizedStatus.toLowerCase())) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_STATUS",
+                    message: `Task at index ${index} has an invalid status`
+                }
+            });
+        } else {
+            normalizedStatus = normalizedStatus.toLowerCase();
+        }
+
+        let normalizedPriority = priority;
+        if (!normalizedPriority) {
+            normalizedPriority = 'low';
+        } else if (typeof normalizedPriority !== 'string' || !['low', 'medium', 'high'].includes(normalizedPriority.toLowerCase())) {
+            return res.status(400).json({
+                error: {
+                    code: "INVALID_TASK_PRIORITY",
+                    message: `Task at index ${index} has an invalid priority`
+                }
+            });
+        } else {
+            normalizedPriority = normalizedPriority.toLowerCase();
+        }
+
+        normalizedTasks.push({
+            title,
+            description,
+            status: normalizedStatus,
+            priority: normalizedPriority
+        });
+    }
+
+    req.body = normalizedTasks;
+    next();
+};
+
+module.exports = { validateTask, validateUpdateTask, validateBulkTasks };
