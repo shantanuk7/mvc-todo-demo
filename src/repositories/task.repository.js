@@ -2,6 +2,11 @@
 
 const tasks = new Map();
 
+/**
+ * Check if a task title already exists.
+ * @param {string} title
+ * @returns {boolean}
+ */
 const taskExistsByTitle = (title) => {
     for (let task of tasks.values()) {
         if (task.title === title) {
@@ -11,11 +16,22 @@ const taskExistsByTitle = (title) => {
     return false;
 }
 
+/**
+ * Save a task in memory.
+ * @param {import('../models/task.model.js')} task
+ * @returns {import('../models/task.model.js')}
+ */
 const saveTask = (task) => {
     tasks.set(task.id, task);
     return task;
 }
 
+/**
+ * Return all tasks with optional filters.
+ * @param {string} [status]
+ * @param {string} [priority]
+ * @returns {Array<import('../models/task.model.js')>}
+ */
 const findAllTasks = (status, priority) => {
     let result = Array.from(tasks.values());
     if (status) {
@@ -31,6 +47,12 @@ const findAllTasks = (status, priority) => {
     return result;
 };
 
+/**
+ * Update a task by id.
+ * @param {string} taskId
+ * @param {object} updatedTask
+ * @returns {import('../models/task.model.js')}
+ */
 const updateTaskByID = (taskId, updatedTask) => {
     const task = tasks.get(taskId);
     if (!task) {
@@ -40,6 +62,11 @@ const updateTaskByID = (taskId, updatedTask) => {
     return tasks.get(taskId);
 }
 
+/**
+ * Find a task by id.
+ * @param {string} taskId
+ * @returns {import('../models/task.model.js')}
+ */
 const findById = (taskId) => {
     const task = tasks.get(taskId);
     if (!task) {
@@ -48,6 +75,11 @@ const findById = (taskId) => {
     return task;
 }
 
+/**
+ * Delete a task by id.
+ * @param {string} taskId
+ * @returns {void}
+ */
 const deleteTaskById = (taskId) => {
     findById(taskId);
     tasks.delete(taskId);
