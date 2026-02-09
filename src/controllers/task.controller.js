@@ -1,6 +1,6 @@
 // src/controllers/task.controller.js
 
-const service = require('../services/task.service.js');
+const service = require('../services/task.service.db.js');
 
 /**
  * Create a single task.
