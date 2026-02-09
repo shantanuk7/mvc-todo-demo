@@ -1,5 +1,10 @@
 // src/middlewares/task.middleware.js
 
+/**
+ * Check if a task title is valid.
+ * @param {unknown} title - Candidate title value.
+ * @returns {boolean} True when title is a non-empty string within 100 chars.
+ */
 const isValidTitle = (title) => {
     return (
         typeof title === 'string' && 
@@ -8,6 +13,11 @@ const isValidTitle = (title) => {
     );
 };
 
+/**
+ * Check if a task description is valid.
+ * @param {unknown} desc - Candidate description value.
+ * @returns {boolean} True when description is a non-empty string within 500 chars.
+ */
 const isValidDescription = (desc) => {
     return (
         typeof desc === 'string' && 
@@ -16,18 +26,35 @@ const isValidDescription = (desc) => {
     );
 };
 
+/**
+ * Check if a task status is valid.
+ * @param {unknown} status - Candidate status value.
+ * @returns {boolean} True when status is one of: pending, in progress, completed.
+ */
 const isValidStatus = (status) => {
     if (typeof status !== 'string') return false;
     const validStatuses = ['pending', 'in progress', 'completed'];
     return validStatuses.includes(status.trim().toLowerCase());
 };
 
+/**
+ * Check if a task priority is valid.
+ * @param {unknown} priority - Candidate priority value.
+ * @returns {boolean} True when priority is one of: low, medium, high.
+ */
 const isValidPriority = (priority) => {
     if (typeof priority !== 'string') return false;
     const validPriorities = ['low', 'medium', 'high'];
     return validPriorities.includes(priority.trim().toLowerCase());
 };
 
+/**
+ * Validate and normalize payload for creating a task.
+ * @param {import('express').Request} req - Express request.
+ * @param {import('express').Response} res - Express response.
+ * @param {import('express').NextFunction} next - Express next handler.
+ * @returns {void}
+ */
 const validateTask = (req, res, next) => {
     const { title, description, status, priority } = req.body;
 
@@ -61,6 +88,13 @@ const validateTask = (req, res, next) => {
     next();
 };
 
+/**
+ * Validate and normalize payload for updating a task.
+ * @param {import('express').Request} req - Express request.
+ * @param {import('express').Response} res - Express response.
+ * @param {import('express').NextFunction} next - Express next handler.
+ * @returns {void}
+ */
 const validateUpdateTask = (req, res, next) => {
     const { title, description, status, priority } = req.body;
 
@@ -101,6 +135,13 @@ const validateUpdateTask = (req, res, next) => {
     next();
 };
 
+/**
+ * Validate and normalize payload for bulk task creation.
+ * @param {import('express').Request} req - Express request.
+ * @param {import('express').Response} res - Express response.
+ * @param {import('express').NextFunction} next - Express next handler.
+ * @returns {void}
+ */
 const validateBulkTasks = (req, res, next) => {
     if (!Array.isArray(req.body) || req.body.length === 0) {
         return res.status(400).json({
