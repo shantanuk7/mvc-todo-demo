@@ -1,5 +1,8 @@
 // src/app.js
 const express = require("express");
+/**
+ * Express application instance.
+ */
 const app = express();
 const taskRoutes = require('./routes/task.route.js')
 
