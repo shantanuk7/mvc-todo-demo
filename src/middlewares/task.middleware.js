@@ -15,14 +15,14 @@ const isValidTitle = (title) => {
 
 /**
  * Check if a task description is valid.
- * @param {unknown} desc - Candidate description value.
+ * @param {unknown} description - Candidate description value.
  * @returns {boolean} True when description is a non-empty string within 500 chars.
  */
-const isValidDescription = (desc) => {
+const isValidDescription = (description) => {
     return (
-        typeof desc === 'string' && 
-        desc.trim().length > 0 && 
-        desc.length <= 500
+        typeof description === 'string' && 
+        description.trim().length > 0 && 
+        description.length <= 500
     );
 };
 
@@ -127,7 +127,7 @@ const validateUpdateTask = (req, res, next) => {
 
     if (priority !== undefined) {
         if (!isValidPriority(priority)) {
-            return res.status(400).json({ error: { code: "INVALID_TASK_PRIORITY", message: "Invalid priority value,Priority must be 'low', 'medium', or 'high'" } });
+            return res.status(400).json({ error: { code: "INVALID_TASK_PRIORITY", message: "Invalid priority value, Priority must be 'low', 'medium', or 'high'" } });
         }
         req.body.priority = priority.trim().toLowerCase();
     }
