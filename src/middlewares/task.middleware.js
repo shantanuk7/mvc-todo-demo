@@ -106,28 +106,28 @@ const validateUpdateTask = (req, res, next) => {
 
     if (title !== undefined) {
         if (!isValidTitle(title)) {
-            return res.status(400).json({ error: { code: "INVALID_TASK_TITLE", message: "Invalid title format" } });
+            return res.status(400).json({ error: { code: "INVALID_TASK_TITLE", message: "Invalid title format, Title must be 1-100 characters long" } });
         }
         req.body.title = title.trim();
     }
 
     if (description !== undefined) {
         if (!isValidDescription(description)) {
-            return res.status(400).json({ error: { code: "INVALID_TASK_DESCRIPTION", message: "Invalid description format" } });
+            return res.status(400).json({ error: { code: "INVALID_TASK_DESCRIPTION", message: "Invalid description format, Description must be 1-500 characters long" } });
         }
         req.body.description = description.trim();
     }
 
     if (status !== undefined) {
         if (!isValidStatus(status)) {
-            return res.status(400).json({ error: { code: "INVALID_TASK_STATUS", message: "Invalid status value" } });
+            return res.status(400).json({ error: { code: "INVALID_TASK_STATUS", message: "Invalid status value, Status must be 'pending', 'in progress', or 'completed'" } });
         }
         req.body.status = status.trim().toLowerCase();
     }
 
     if (priority !== undefined) {
         if (!isValidPriority(priority)) {
-            return res.status(400).json({ error: { code: "INVALID_TASK_PRIORITY", message: "Invalid priority value" } });
+            return res.status(400).json({ error: { code: "INVALID_TASK_PRIORITY", message: "Invalid priority value,Priority must be 'low', 'medium', or 'high'" } });
         }
         req.body.priority = priority.trim().toLowerCase();
     }
