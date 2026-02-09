@@ -1,9 +1,6 @@
 // src/routes/task.route.js
 
 const express = require('express');
-/**
- * Task routes.
- */
 const router = express.Router();
 const taskController = require('../controllers/task.controller.js');
 const { validateTask, validateUpdateTask, validateBulkTasks } = require('../middlewares/task.middleware.js');
